@@ -1,0 +1,1070 @@
+{
+  "SchemaVersion": 2,
+  "CreatedAt": "2025-06-16T11:19:36.898752+07:00",
+  "ArtifactName": ".",
+  "ArtifactType": "repository",
+  "Metadata": {
+    "ImageConfig": {
+      "architecture": "",
+      "created": "0001-01-01T00:00:00Z",
+      "os": "",
+      "rootfs": {
+        "type": "",
+        "diff_ids": null
+      },
+      "config": {}
+    }
+  },
+  "Results": [
+    {
+      "Target": "go.mod",
+      "Class": "lang-pkgs",
+      "Type": "gomod",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2025-30204",
+          "PkgID": "github.com/golang-jwt/jwt@v3.2.2+incompatible",
+          "PkgName": "github.com/golang-jwt/jwt",
+          "PkgIdentifier": {
+            "PURL": "pkg:golang/github.com/golang-jwt/jwt@v3.2.2%2Bincompatible",
+            "UID": "f1c7a8e70ee680c1"
+          },
+          "InstalledVersion": "v3.2.2+incompatible",
+          "Status": "affected",
+          "Layer": {},
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-30204",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Title": "golang-jwt/jwt: jwt-go allows excessive memory allocation during header parsing",
+          "Description": "golang-jwt is a Go implementation of JSON Web Tokens. Starting in version 3.2.0 and prior to versions 5.2.2 and 4.5.2, the function parse.ParseUnverified splits (via a call to strings.Split) its argument (which is untrusted data) on periods. As a result, in the face of a malicious request whose Authorization header consists of Bearer  followed by many period characters, a call to that function incurs allocations to the tune of O(n) bytes (where n stands for the length of the function's argument), with a constant factor of about 16. This issue is fixed in 5.2.2 and 4.5.2.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-405"
+          ],
+          "VendorSeverity": {
+            "alma": 3,
+            "amazon": 3,
+            "azure": 3,
+            "cbl-mariner": 3,
+            "ghsa": 3,
+            "oracle-oval": 3,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2025:7425",
+            "https://access.redhat.com/security/cve/CVE-2025-30204",
+            "https://bugzilla.redhat.com/2354195",
+            "https://errata.almalinux.org/9/ALSA-2025-7425.html",
+            "https://github.com/golang-jwt/jwt",
+            "https://github.com/golang-jwt/jwt/commit/0951d184286dece21f73c85673fd308786ffe9c3",
+            "https://github.com/golang-jwt/jwt/commit/bf316c48137a1212f8d0af9288cc9ce8e59f1afb",
+            "https://github.com/golang-jwt/jwt/security/advisories/GHSA-mh63-6h87-95cp",
+            "https://linux.oracle.com/cve/CVE-2025-30204.html",
+            "https://linux.oracle.com/errata/ELSA-2025-7967.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-30204",
+            "https://security.netapp.com/advisory/ntap-20250404-0002",
+            "https://security.netapp.com/advisory/ntap-20250404-0002/",
+            "https://www.cve.org/CVERecord?id=CVE-2025-30204"
+          ],
+          "PublishedDate": "2025-03-21T22:15:26.42Z",
+          "LastModifiedDate": "2025-04-10T13:15:52.097Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-29923",
+          "PkgID": "github.com/redis/go-redis/v9@v9.7.1",
+          "PkgName": "github.com/redis/go-redis/v9",
+          "PkgIdentifier": {
+            "PURL": "pkg:golang/github.com/redis/go-redis/v9@v9.7.1",
+            "UID": "c4300eb607645cfa"
+          },
+          "InstalledVersion": "v9.7.1",
+          "FixedVersion": "9.7.3, 9.6.3, 9.5.5",
+          "Status": "fixed",
+          "Layer": {},
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-29923",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Title": "github.com/redis/go-redis: go-redis allows potential out of order responses when `CLIENT SETINFO` times out during connection establishment",
+          "Description": "go-redis is the official Redis client library for the Go programming language. Prior to 9.5.5, 9.6.3, and 9.7.3, go-redis potentially responds out of order when `CLIENT SETINFO` times out during connection establishment. This can happen when the client is configured to transmit its identity, there are network connectivity issues, or the client was configured with aggressive timeouts. The problem occurs for multiple use cases. For sticky connections, you receive persistent out-of-order responses for the lifetime of the connection. All commands in the pipeline receive incorrect responses. When used with the default ConnPool once a connection is returned after use with ConnPool#Put the read buffer will be checked and the connection will be marked as bad due to the unread data. This means that at most one out-of-order response before the connection is discarded. This issue is fixed in 9.5.5, 9.6.3, and 9.7.3. You can prevent the vulnerability by setting the flag DisableIndentity to true when constructing the client instance.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-20"
+          ],
+          "VendorSeverity": {
+            "azure": 1,
+            "ghsa": 1,
+            "redhat": 1
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
+              "V3Score": 3.7
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
+              "V3Score": 3.7
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2025-29923",
+            "https://github.com/redis/go-redis",
+            "https://github.com/redis/go-redis/commit/d236865b0cfa1b752ea4b7da666b1fdcd0acebb6",
+            "https://github.com/redis/go-redis/pull/3295",
+            "https://github.com/redis/go-redis/security/advisories/GHSA-92cp-5422-2mw7",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-29923",
+            "https://www.cve.org/CVERecord?id=CVE-2025-29923"
+          ],
+          "PublishedDate": "2025-03-20T18:15:19.23Z",
+          "LastModifiedDate": "2025-03-20T18:15:19.23Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2024-45337",
+          "PkgID": "golang.org/x/crypto@v0.26.0",
+          "PkgName": "golang.org/x/crypto",
+          "PkgIdentifier": {
+            "PURL": "pkg:golang/golang.org/x/crypto@v0.26.0",
+            "UID": "ae3e50d472695210"
+          },
+          "InstalledVersion": "v0.26.0",
+          "FixedVersion": "0.31.0",
+          "Status": "fixed",
+          "Layer": {},
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2024-45337",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Title": "golang.org/x/crypto/ssh: Misuse of ServerConfig.PublicKeyCallback may cause authorization bypass in golang.org/x/crypto",
+          "Description": "Applications and libraries which misuse connection.serverAuthenticate (via callback field ServerConfig.PublicKeyCallback) may be susceptible to an authorization bypass. The documentation for ServerConfig.PublicKeyCallback says that \"A call to this function does not guarantee that the key offered is in fact used to authenticate.\" Specifically, the SSH protocol allows clients to inquire about whether a public key is acceptable before proving control of the corresponding private key. PublicKeyCallback may be called with multiple keys, and the order in which the keys were provided cannot be used to infer which key the client successfully authenticated with, if any. Some applications, which store the key(s) passed to PublicKeyCallback (or derived information) and make security relevant determinations based on it once the connection is established, may make incorrect assumptions. For example, an attacker may send public keys A and B, and then authenticate with A. PublicKeyCallback would be called only twice, first with A and then with B. A vulnerable application may then make authorization decisions based on key B for which the attacker does not actually control the private key. Since this API is widely misused, as a partial mitigation golang.org/x/cry...@v0.31.0 enforces the property that, when successfully authenticating via public key, the last key passed to ServerConfig.PublicKeyCallback will be the key used to authenticate the connection. PublicKeyCallback will now be called multiple times with the same key, if necessary. Note that the client may still not control the last key passed to PublicKeyCallback if the connection is then authenticated with a different method, such as PasswordCallback, KeyboardInteractiveCallback, or NoClientAuth. Users should be using the Extensions field of the Permissions return value from the various authentication callbacks to record data associated with the authentication attempt instead of referencing external state. Once the connection is established the state corresponding to the successful authentication attempt can be retrieved via the ServerConn.Permissions field. Note that some third-party libraries misuse the Permissions type by sharing it across authentication attempts; users of third-party libraries should refer to the relevant projects for guidance.",
+          "Severity": "CRITICAL",
+          "VendorSeverity": {
+            "amazon": 3,
+            "azure": 4,
+            "cbl-mariner": 4,
+            "ghsa": 4,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+              "V3Score": 9.1
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:H/I:H/A:N",
+              "V3Score": 8.2
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2024/12/11/2",
+            "https://access.redhat.com/security/cve/CVE-2024-45337",
+            "https://github.com/golang/crypto",
+            "https://github.com/golang/crypto/commit/b4f1988a35dee11ec3e05d6bf3e90b695fbd8909",
+            "https://go.dev/cl/635315",
+            "https://go.dev/issue/70779",
+            "https://groups.google.com/g/golang-announce/c/-nPEi39gI4Q/m/cGVPJCqdAQAJ",
+            "https://nvd.nist.gov/vuln/detail/CVE-2024-45337",
+            "https://pkg.go.dev/vuln/GO-2024-3321",
+            "https://security.netapp.com/advisory/ntap-20250131-0007",
+            "https://security.netapp.com/advisory/ntap-20250131-0007/",
+            "https://www.cve.org/CVERecord?id=CVE-2024-45337"
+          ],
+          "PublishedDate": "2024-12-12T02:02:07.97Z",
+          "LastModifiedDate": "2025-02-18T21:15:22.187Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-22869",
+          "PkgID": "golang.org/x/crypto@v0.26.0",
+          "PkgName": "golang.org/x/crypto",
+          "PkgIdentifier": {
+            "PURL": "pkg:golang/golang.org/x/crypto@v0.26.0",
+            "UID": "ae3e50d472695210"
+          },
+          "InstalledVersion": "v0.26.0",
+          "FixedVersion": "0.35.0",
+          "Status": "fixed",
+          "Layer": {},
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-22869",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Title": "golang.org/x/crypto/ssh: Denial of Service in the Key Exchange of golang.org/x/crypto/ssh",
+          "Description": "SSH servers which implement file transfer protocols are vulnerable to a denial of service attack from clients which complete the key exchange slowly, or not at all, causing pending content to be read into memory, but never transmitted.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-770"
+          ],
+          "VendorSeverity": {
+            "alma": 3,
+            "amazon": 3,
+            "azure": 3,
+            "cbl-mariner": 3,
+            "ghsa": 3,
+            "oracle-oval": 3,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2025:3833",
+            "https://access.redhat.com/security/cve/CVE-2025-22869",
+            "https://bugzilla.redhat.com/2348367",
+            "https://errata.almalinux.org/9/ALSA-2025-3833.html",
+            "https://github.com/golang/crypto",
+            "https://github.com/golang/crypto/commit/7292932d45d55c7199324ab0027cc86e8198aa22",
+            "https://go-review.googlesource.com/c/crypto/+/652135",
+            "https://go.dev/cl/652135",
+            "https://go.dev/issue/71931",
+            "https://linux.oracle.com/cve/CVE-2025-22869.html",
+            "https://linux.oracle.com/errata/ELSA-2025-7416.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-22869",
+            "https://pkg.go.dev/vuln/GO-2025-3487",
+            "https://security.netapp.com/advisory/ntap-20250411-0010",
+            "https://security.netapp.com/advisory/ntap-20250411-0010/",
+            "https://www.cve.org/CVERecord?id=CVE-2025-22869"
+          ],
+          "PublishedDate": "2025-02-26T08:14:24.997Z",
+          "LastModifiedDate": "2025-05-01T19:28:20.74Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-22870",
+          "PkgID": "golang.org/x/net@v0.28.0",
+          "PkgName": "golang.org/x/net",
+          "PkgIdentifier": {
+            "PURL": "pkg:golang/golang.org/x/net@v0.28.0",
+            "UID": "a9c9b0038999f9c2"
+          },
+          "InstalledVersion": "v0.28.0",
+          "FixedVersion": "0.36.0",
+          "Status": "fixed",
+          "Layer": {},
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-22870",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Title": "golang.org/x/net/proxy: golang.org/x/net/http/httpproxy: HTTP Proxy bypass using IPv6 Zone IDs in golang.org/x/net",
+          "Description": "Matching of hosts against proxy patterns can improperly treat an IPv6 zone ID as a hostname component. For example, when the NO_PROXY environment variable is set to \"*.example.com\", a request to \"[::1%25.example.com]:80` will incorrectly match and not be proxied.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-115"
+          ],
+          "VendorSeverity": {
+            "amazon": 2,
+            "azure": 2,
+            "cbl-mariner": 2,
+            "ghsa": 2,
+            "redhat": 2,
+            "ubuntu": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:L",
+              "V3Score": 4.4
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:L/I:N/A:L",
+              "V3Score": 4.4
+            }
+          },
+          "References": [
+            "http://www.openwall.com/lists/oss-security/2025/03/07/2",
+            "https://access.redhat.com/security/cve/CVE-2025-22870",
+            "https://github.com/golang/go/issues/71984",
+            "https://go-review.googlesource.com/q/project:net",
+            "https://go.dev/cl/654697",
+            "https://go.dev/issue/71984",
+            "https://groups.google.com/g/golang-announce/c/4t3lzH3I0eI/m/b42ImqrBAQAJ",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-22870",
+            "https://pkg.go.dev/vuln/GO-2025-3503",
+            "https://security.netapp.com/advisory/ntap-20250509-0007",
+            "https://security.netapp.com/advisory/ntap-20250509-0007/",
+            "https://www.cve.org/CVERecord?id=CVE-2025-22870"
+          ],
+          "PublishedDate": "2025-03-12T19:15:38.31Z",
+          "LastModifiedDate": "2025-05-09T20:15:38.727Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-22872",
+          "PkgID": "golang.org/x/net@v0.28.0",
+          "PkgName": "golang.org/x/net",
+          "PkgIdentifier": {
+            "PURL": "pkg:golang/golang.org/x/net@v0.28.0",
+            "UID": "a9c9b0038999f9c2"
+          },
+          "InstalledVersion": "v0.28.0",
+          "FixedVersion": "0.38.0",
+          "Status": "fixed",
+          "Layer": {},
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-22872",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory Go",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Ago"
+          },
+          "Title": "golang.org/x/net/html: Incorrect Neutralization of Input During Web Page Generation in x/net in golang.org/x/net",
+          "Description": "The tokenizer incorrectly interprets tags with unquoted attribute values that end with a solidus character (/) as self-closing. When directly using Tokenizer, this can result in such tags incorrectly being marked as self-closing, and when using the Parse functions, this can result in content following such tags as being placed in the wrong scope during DOM construction, but only when tags are in foreign content (e.g. \u003cmath\u003e, \u003csvg\u003e, etc contexts).",
+          "Severity": "MEDIUM",
+          "VendorSeverity": {
+            "amazon": 3,
+            "azure": 2,
+            "cbl-mariner": 2,
+            "ghsa": 2,
+            "redhat": 2
+          },
+          "CVSS": {
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:L/I:L/A:L",
+              "V3Score": 6.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2025-22872",
+            "https://github.com/advisories/GHSA-vvgc-356p-c3xw",
+            "https://go.dev/cl/662715",
+            "https://go.dev/issue/73070",
+            "https://groups.google.com/g/golang-announce/c/ezSKR9vqbqA",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-22872",
+            "https://pkg.go.dev/vuln/GO-2025-3595",
+            "https://security.netapp.com/advisory/ntap-20250516-0007",
+            "https://security.netapp.com/advisory/ntap-20250516-0007/",
+            "https://www.cve.org/CVERecord?id=CVE-2025-22872"
+          ],
+          "PublishedDate": "2025-04-16T18:16:04.183Z",
+          "LastModifiedDate": "2025-05-16T23:15:19.707Z"
+        }
+      ]
+    },
+    {
+      "Target": "Dockerfile",
+      "Class": "config",
+      "Type": "dockerfile",
+      "MisconfSummary": {
+        "Successes": 24,
+        "Failures": 4
+      },
+      "Misconfigurations": [
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS001",
+          "AVDID": "AVD-DS-0001",
+          "Title": "':latest' tag used",
+          "Description": "When using a 'FROM' statement you should use a specific tag to avoid uncontrolled behavior when the image is updated.",
+          "Message": "Specify a tag in the 'FROM' statement for image 'asia-southeast1-docker.pkg.dev/tk-dev-micro/base-image/distroless-go'",
+          "Namespace": "builtin.dockerfile.DS001",
+          "Query": "data.builtin.dockerfile.DS001.deny",
+          "Resolution": "Add a tag to the image in the 'FROM' statement",
+          "Severity": "MEDIUM",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds001",
+          "References": [
+            "https://avd.aquasec.com/misconfig/ds001"
+          ],
+          "Status": "FAIL",
+          "Layer": {},
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "StartLine": 40,
+            "EndLine": 40,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 40,
+                  "Content": "FROM asia-southeast1-docker.pkg.dev/tk-dev-micro/base-image/distroless-go",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[38;5;64mFROM\u001b[0m\u001b[38;5;37m asia-southeast1-docker.pkg.dev/tk-dev-micro/base-image/distroless-go\u001b[0m",
+                  "FirstCause": true,
+                  "LastCause": true
+                }
+              ]
+            },
+            "RenderedCause": {}
+          }
+        },
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS002",
+          "AVDID": "AVD-DS-0002",
+          "Title": "Image user should not be 'root'",
+          "Description": "Running containers with 'root' user can lead to a container escape situation. It is a best practice to run containers as non-root users, which can be done by adding a 'USER' statement to the Dockerfile.",
+          "Message": "Specify at least 1 USER command in Dockerfile with non-root user as argument",
+          "Namespace": "builtin.dockerfile.DS002",
+          "Query": "data.builtin.dockerfile.DS002.deny",
+          "Resolution": "Add 'USER \u003cnon root user name\u003e' line to the Dockerfile",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds002",
+          "References": [
+            "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/",
+            "https://avd.aquasec.com/misconfig/ds002"
+          ],
+          "Status": "FAIL",
+          "Layer": {},
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "Code": {
+              "Lines": null
+            },
+            "RenderedCause": {}
+          }
+        },
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS026",
+          "AVDID": "AVD-DS-0026",
+          "Title": "No HEALTHCHECK defined",
+          "Description": "You should add HEALTHCHECK instruction in your docker container images to perform the health check on running containers.",
+          "Message": "Add HEALTHCHECK instruction in your Dockerfile",
+          "Namespace": "builtin.dockerfile.DS026",
+          "Query": "data.builtin.dockerfile.DS026.deny",
+          "Resolution": "Add HEALTHCHECK instruction in Dockerfile",
+          "Severity": "LOW",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds026",
+          "References": [
+            "https://blog.aquasec.com/docker-security-best-practices",
+            "https://avd.aquasec.com/misconfig/ds026"
+          ],
+          "Status": "FAIL",
+          "Layer": {},
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "Code": {
+              "Lines": null
+            },
+            "RenderedCause": {}
+          }
+        },
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS029",
+          "AVDID": "AVD-DS-0029",
+          "Title": "'apt-get' missing '--no-install-recommends'",
+          "Description": "'apt-get' install should use '--no-install-recommends' to minimize image size.",
+          "Message": "'--no-install-recommends' flag is missed: 'apt-get update \u0026\u0026 apt-get install -y \tbash \tcurl \tgit \topenssh-client'",
+          "Namespace": "builtin.dockerfile.DS029",
+          "Query": "data.builtin.dockerfile.DS029.deny",
+          "Resolution": "Add '--no-install-recommends' flag to 'apt-get'",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds029",
+          "References": [
+            "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/",
+            "https://avd.aquasec.com/misconfig/ds029"
+          ],
+          "Status": "FAIL",
+          "Layer": {},
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "StartLine": 6,
+            "EndLine": 10,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 6,
+                  "Content": "RUN apt-get update \u0026\u0026 apt-get install -y \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[38;5;64mRUN\u001b[0m apt-get update \u001b[38;5;245m\u0026\u0026\u001b[0m apt-get install -y \u001b[38;5;124m\\",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 7,
+                  "Content": "\tbash \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m\tbash \u001b[38;5;124m\\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 8,
+                  "Content": "\tcurl \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m\tcurl \u001b[38;5;124m\\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 9,
+                  "Content": "\tgit \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m\tgit \u001b[38;5;124m\\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 10,
+                  "Content": "\topenssh-client",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\u001b[0m\topenssh-client",
+                  "FirstCause": false,
+                  "LastCause": true
+                }
+              ]
+            },
+            "RenderedCause": {}
+          }
+        }
+      ]
+    },
+    {
+      "Target": "Dockerfile.listener",
+      "Class": "config",
+      "Type": "dockerfile",
+      "MisconfSummary": {
+        "Successes": 24,
+        "Failures": 4
+      },
+      "Misconfigurations": [
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS001",
+          "AVDID": "AVD-DS-0001",
+          "Title": "':latest' tag used",
+          "Description": "When using a 'FROM' statement you should use a specific tag to avoid uncontrolled behavior when the image is updated.",
+          "Message": "Specify a tag in the 'FROM' statement for image 'asia-southeast1-docker.pkg.dev/tk-dev-micro/base-image/distroless-go'",
+          "Namespace": "builtin.dockerfile.DS001",
+          "Query": "data.builtin.dockerfile.DS001.deny",
+          "Resolution": "Add a tag to the image in the 'FROM' statement",
+          "Severity": "MEDIUM",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds001",
+          "References": [
+            "https://avd.aquasec.com/misconfig/ds001"
+          ],
+          "Status": "FAIL",
+          "Layer": {},
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "StartLine": 40,
+            "EndLine": 40,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 40,
+                  "Content": "FROM asia-southeast1-docker.pkg.dev/tk-dev-micro/base-image/distroless-go",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "FROM asia-southeast1-docker.pkg.dev/tk-dev-micro/base-image/distroless-go",
+                  "FirstCause": true,
+                  "LastCause": true
+                }
+              ]
+            },
+            "RenderedCause": {}
+          }
+        },
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS002",
+          "AVDID": "AVD-DS-0002",
+          "Title": "Image user should not be 'root'",
+          "Description": "Running containers with 'root' user can lead to a container escape situation. It is a best practice to run containers as non-root users, which can be done by adding a 'USER' statement to the Dockerfile.",
+          "Message": "Specify at least 1 USER command in Dockerfile with non-root user as argument",
+          "Namespace": "builtin.dockerfile.DS002",
+          "Query": "data.builtin.dockerfile.DS002.deny",
+          "Resolution": "Add 'USER \u003cnon root user name\u003e' line to the Dockerfile",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds002",
+          "References": [
+            "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/",
+            "https://avd.aquasec.com/misconfig/ds002"
+          ],
+          "Status": "FAIL",
+          "Layer": {},
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "Code": {
+              "Lines": null
+            },
+            "RenderedCause": {}
+          }
+        },
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS026",
+          "AVDID": "AVD-DS-0026",
+          "Title": "No HEALTHCHECK defined",
+          "Description": "You should add HEALTHCHECK instruction in your docker container images to perform the health check on running containers.",
+          "Message": "Add HEALTHCHECK instruction in your Dockerfile",
+          "Namespace": "builtin.dockerfile.DS026",
+          "Query": "data.builtin.dockerfile.DS026.deny",
+          "Resolution": "Add HEALTHCHECK instruction in Dockerfile",
+          "Severity": "LOW",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds026",
+          "References": [
+            "https://blog.aquasec.com/docker-security-best-practices",
+            "https://avd.aquasec.com/misconfig/ds026"
+          ],
+          "Status": "FAIL",
+          "Layer": {},
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "Code": {
+              "Lines": null
+            },
+            "RenderedCause": {}
+          }
+        },
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS029",
+          "AVDID": "AVD-DS-0029",
+          "Title": "'apt-get' missing '--no-install-recommends'",
+          "Description": "'apt-get' install should use '--no-install-recommends' to minimize image size.",
+          "Message": "'--no-install-recommends' flag is missed: 'apt-get update \u0026\u0026 apt-get install -y \tbash \tcurl \tgit \topenssh-client'",
+          "Namespace": "builtin.dockerfile.DS029",
+          "Query": "data.builtin.dockerfile.DS029.deny",
+          "Resolution": "Add '--no-install-recommends' flag to 'apt-get'",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds029",
+          "References": [
+            "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/",
+            "https://avd.aquasec.com/misconfig/ds029"
+          ],
+          "Status": "FAIL",
+          "Layer": {},
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "StartLine": 6,
+            "EndLine": 10,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 6,
+                  "Content": "RUN apt-get update \u0026\u0026 apt-get install -y \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "RUN apt-get update \u0026\u0026 apt-get install -y \\",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 7,
+                  "Content": "\tbash \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\tbash \\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 8,
+                  "Content": "\tcurl \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\tcurl \\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 9,
+                  "Content": "\tgit \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\tgit \\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 10,
+                  "Content": "\topenssh-client",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\topenssh-client",
+                  "FirstCause": false,
+                  "LastCause": true
+                }
+              ]
+            },
+            "RenderedCause": {}
+          }
+        }
+      ]
+    },
+    {
+      "Target": "Dockerfile.scheduler",
+      "Class": "config",
+      "Type": "dockerfile",
+      "MisconfSummary": {
+        "Successes": 24,
+        "Failures": 4
+      },
+      "Misconfigurations": [
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS001",
+          "AVDID": "AVD-DS-0001",
+          "Title": "':latest' tag used",
+          "Description": "When using a 'FROM' statement you should use a specific tag to avoid uncontrolled behavior when the image is updated.",
+          "Message": "Specify a tag in the 'FROM' statement for image 'asia-southeast1-docker.pkg.dev/tk-dev-micro/base-image/distroless-go'",
+          "Namespace": "builtin.dockerfile.DS001",
+          "Query": "data.builtin.dockerfile.DS001.deny",
+          "Resolution": "Add a tag to the image in the 'FROM' statement",
+          "Severity": "MEDIUM",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds001",
+          "References": [
+            "https://avd.aquasec.com/misconfig/ds001"
+          ],
+          "Status": "FAIL",
+          "Layer": {},
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "StartLine": 40,
+            "EndLine": 40,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 40,
+                  "Content": "FROM asia-southeast1-docker.pkg.dev/tk-dev-micro/base-image/distroless-go",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "FROM asia-southeast1-docker.pkg.dev/tk-dev-micro/base-image/distroless-go",
+                  "FirstCause": true,
+                  "LastCause": true
+                }
+              ]
+            },
+            "RenderedCause": {}
+          }
+        },
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS002",
+          "AVDID": "AVD-DS-0002",
+          "Title": "Image user should not be 'root'",
+          "Description": "Running containers with 'root' user can lead to a container escape situation. It is a best practice to run containers as non-root users, which can be done by adding a 'USER' statement to the Dockerfile.",
+          "Message": "Specify at least 1 USER command in Dockerfile with non-root user as argument",
+          "Namespace": "builtin.dockerfile.DS002",
+          "Query": "data.builtin.dockerfile.DS002.deny",
+          "Resolution": "Add 'USER \u003cnon root user name\u003e' line to the Dockerfile",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds002",
+          "References": [
+            "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/",
+            "https://avd.aquasec.com/misconfig/ds002"
+          ],
+          "Status": "FAIL",
+          "Layer": {},
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "Code": {
+              "Lines": null
+            },
+            "RenderedCause": {}
+          }
+        },
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS026",
+          "AVDID": "AVD-DS-0026",
+          "Title": "No HEALTHCHECK defined",
+          "Description": "You should add HEALTHCHECK instruction in your docker container images to perform the health check on running containers.",
+          "Message": "Add HEALTHCHECK instruction in your Dockerfile",
+          "Namespace": "builtin.dockerfile.DS026",
+          "Query": "data.builtin.dockerfile.DS026.deny",
+          "Resolution": "Add HEALTHCHECK instruction in Dockerfile",
+          "Severity": "LOW",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds026",
+          "References": [
+            "https://blog.aquasec.com/docker-security-best-practices",
+            "https://avd.aquasec.com/misconfig/ds026"
+          ],
+          "Status": "FAIL",
+          "Layer": {},
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "Code": {
+              "Lines": null
+            },
+            "RenderedCause": {}
+          }
+        },
+        {
+          "Type": "Dockerfile Security Check",
+          "ID": "DS029",
+          "AVDID": "AVD-DS-0029",
+          "Title": "'apt-get' missing '--no-install-recommends'",
+          "Description": "'apt-get' install should use '--no-install-recommends' to minimize image size.",
+          "Message": "'--no-install-recommends' flag is missed: 'apt-get update \u0026\u0026 apt-get install -y \tbash \tcurl \tgit \topenssh-client'",
+          "Namespace": "builtin.dockerfile.DS029",
+          "Query": "data.builtin.dockerfile.DS029.deny",
+          "Resolution": "Add '--no-install-recommends' flag to 'apt-get'",
+          "Severity": "HIGH",
+          "PrimaryURL": "https://avd.aquasec.com/misconfig/ds029",
+          "References": [
+            "https://docs.docker.com/develop/develop-images/dockerfile_best-practices/",
+            "https://avd.aquasec.com/misconfig/ds029"
+          ],
+          "Status": "FAIL",
+          "Layer": {},
+          "CauseMetadata": {
+            "Provider": "Dockerfile",
+            "Service": "general",
+            "StartLine": 6,
+            "EndLine": 10,
+            "Code": {
+              "Lines": [
+                {
+                  "Number": 6,
+                  "Content": "RUN apt-get update \u0026\u0026 apt-get install -y \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "RUN apt-get update \u0026\u0026 apt-get install -y \\",
+                  "FirstCause": true,
+                  "LastCause": false
+                },
+                {
+                  "Number": 7,
+                  "Content": "\tbash \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\tbash \\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 8,
+                  "Content": "\tcurl \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\tcurl \\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 9,
+                  "Content": "\tgit \\",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\tgit \\",
+                  "FirstCause": false,
+                  "LastCause": false
+                },
+                {
+                  "Number": 10,
+                  "Content": "\topenssh-client",
+                  "IsCause": true,
+                  "Annotation": "",
+                  "Truncated": false,
+                  "Highlighted": "\topenssh-client",
+                  "FirstCause": false,
+                  "LastCause": true
+                }
+              ]
+            },
+            "RenderedCause": {}
+          }
+        }
+      ]
+    },
+    {
+      "Target": "go.mod",
+      "Class": "license",
+      "Licenses": [
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "github.com/go-playground/locales",
+          "FilePath": "go.mod",
+          "Name": "MIT",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        },
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "github.com/go-playground/universal-translator",
+          "FilePath": "go.mod",
+          "Name": "MIT",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        },
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "golang.org/x/sync",
+          "FilePath": "go.mod",
+          "Name": "BSD-3-Clause",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        },
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "github.com/dgryski/go-rendezvous",
+          "FilePath": "go.mod",
+          "Name": "MIT",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        },
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "github.com/jinzhu/inflection",
+          "FilePath": "go.mod",
+          "Name": "MIT",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        },
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "github.com/jinzhu/now",
+          "FilePath": "go.mod",
+          "Name": "MIT",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        },
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "github.com/joho/godotenv",
+          "FilePath": "go.mod",
+          "Name": "MIT",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        },
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "github.com/json-iterator/go",
+          "FilePath": "go.mod",
+          "Name": "MIT",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        },
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "github.com/mattn/go-isatty",
+          "FilePath": "go.mod",
+          "Name": "MIT",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        },
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "github.com/modern-go/concurrent",
+          "FilePath": "go.mod",
+          "Name": "Apache-2.0",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        },
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "github.com/modern-go/reflect2",
+          "FilePath": "go.mod",
+          "Name": "Apache-2.0",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        },
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "github.com/russross/blackfriday/v2",
+          "FilePath": "go.mod",
+          "Name": "BSD-2-Clause",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        },
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "gopkg.in/yaml.v3",
+          "FilePath": "go.mod",
+          "Name": "Apache-2.0",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        },
+        {
+          "Severity": "LOW",
+          "Category": "notice",
+          "PkgName": "gopkg.in/yaml.v3",
+          "FilePath": "go.mod",
+          "Name": "MIT",
+          "Text": "",
+          "Confidence": 1,
+          "Link": ""
+        }
+      ]
+    }
+  ]
+}
